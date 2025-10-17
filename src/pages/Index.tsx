@@ -41,7 +41,7 @@ const Index = () => {
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-foreground/70 mb-4 max-w-2xl mx-auto font-medium">
-          Bold, feminine-rebellious quiz for small business owners & solo entrepreneurs
+          Find your launch personality in 5 questions
         </p>
 
         <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-xl mx-auto">
@@ -70,7 +70,7 @@ const Index = () => {
       {/* Footer credit */}
       <div className="absolute bottom-6 left-0 right-0 text-center">
         <p className="text-xs text-muted-foreground font-typewriter">
-          90s zine meets modern brand strategy ✨
+          Built for the bold ✨
         </p>
       </div>
     </div>
