@@ -41,11 +41,11 @@ const Index = () => {
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-foreground/70 mb-4 max-w-2xl mx-auto font-medium">
-          Find your launch personality in 5 questions
+          You've been building something real. Now it's time to show the world.
         </p>
 
         <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-xl mx-auto">
-          5 quick questions to diagnose your launch personality — are you a Headliner, Chill Drop Queen, Hustlecore Hero, or Soft-Launch Siren?
+          Take the quiz. Discover how you launch best — whether you go big, stay chill, hustle hard, or slip in softly.
         </p>
 
         {/* CTA Button */}
@@ -70,7 +70,7 @@ const Index = () => {
       {/* Footer credit */}
       <div className="absolute bottom-6 left-0 right-0 text-center">
         <p className="text-xs text-muted-foreground font-typewriter">
-          Built for the bold ✨
+          For the ones ready to be seen ✨
         </p>
       </div>
     </div>
