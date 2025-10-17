@@ -13,7 +13,16 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'typewriter': ['Special Elite', 'monospace'],
+        'sans': ['DM Sans', 'sans-serif'],
+      },
       colors: {
+        magenta: "hsl(var(--magenta))",
+        cobalt: "hsl(var(--cobalt))",
+        blush: "hsl(var(--blush))",
+        beige: "hsl(var(--beige))",
+        'soft-black': "hsl(var(--soft-black))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -65,25 +74,44 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        },
+        "slide-up": {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        },
+        "glitch": {
+          "0%, 100%": { transform: "translate(0)" },
+          "25%": { transform: "translate(-2px, 2px)" },
+          "50%": { transform: "translate(2px, -2px)" },
+          "75%": { transform: "translate(-2px, -2px)" }
+        },
+        "flicker": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.8" }
+        },
+        "confetti-fall": {
+          "0%": { transform: "translateY(-100vh) rotate(0deg)", opacity: "1" },
+          "100%": { transform: "translateY(100vh) rotate(360deg)", opacity: "0" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-up": "slide-up 0.6s ease-out",
+        "glitch": "glitch 0.3s ease-in-out",
+        "flicker": "flicker 2s ease-in-out infinite",
+        "confetti-fall": "confetti-fall 3s ease-out forwards"
       },
     },
   },
