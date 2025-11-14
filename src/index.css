@@ -44,6 +44,11 @@ All colors MUST be HSL.
     --ink-black: 40 10% 12%;
     --soft-blush: 1 66% 82%;
     --pale-lavender: 311 35% 92%;
+
+    --magenta: 328 100% 54%;
+    --cobalt: 214 100% 50%;
+    --blush: 340 100% 85%;
+    --beige: 39 33% 88%;
     
     --gradient-riot: linear-gradient(90deg, hsl(4 79% 54%), hsl(345 84% 61%));
     --gradient-zine: linear-gradient(180deg, hsl(311 35% 92%), hsl(1 66% 82%));
@@ -99,6 +104,12 @@ All colors MUST be HSL.
     --border: 259 30% 58% / 0.25;
     --input: 259 30% 58% / 0.15;
     --ring: 4 79% 54%;
+
+    --magenta: 328 100% 54%;
+    --cobalt: 214 100% 50%;
+    --blush: 340 100% 85%;
+    --beige: 39 33% 88%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
