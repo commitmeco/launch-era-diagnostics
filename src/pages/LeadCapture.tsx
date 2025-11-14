@@ -37,40 +37,88 @@ const LeadCapture = () => {
     }
 
     try {
+      const mailerliteKey = import.meta.env.VITE_MAILERLITE_API_KEY;
+      const flodeskKey = import.meta.env.VITE_FLODESK_API_KEY;
+
+      console.log('MailerLite Key present:', mailerliteKey ? 'Yes' : 'No');
+      console.log('Flodesk Key present:', flodeskKey ? 'Yes' : 'No');
+
+      // Send to both services in parallel
+      const promises = [];
+
       // Add subscriber to MailerLite
-      const apiKey = import.meta.env.VITE_MAILERLITE_API_KEY;
+      if (mailerliteKey) {
+        const groupId = import.meta.env.VITE_MAILERLITE_GROUP_ID;
+        const groups = groupId ? [groupId] : [];
 
-      console.log('API Key present:', apiKey ? 'Yes' : 'No');
-
-      const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          fields: {
-            name: formData.name,
-          },
-          groups: [], // Add group IDs here if you want to add them to specific groups
-        }),
-      });
-
-      const responseData = await response.json();
-      console.log('MailerLite Response:', response.status, responseData);
-
-      if (!response.ok) {
-        throw new Error(responseData.message || 'Failed to subscribe');
+        promises.push(
+          fetch('https://connect.mailerlite.com/api/subscribers', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${mailerliteKey}`,
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              fields: {
+                name: formData.name,
+              },
+              groups: groups,
+            }),
+          }).then(async (res) => {
+            const data = await res.json();
+            console.log('MailerLite Response:', res.status, data);
+            console.log('Added to group:', groups.length > 0 ? groups[0] : 'No group');
+            if (!res.ok) throw new Error('MailerLite: ' + (data.message || 'Failed'));
+            return { service: 'MailerLite', success: true };
+          })
+        );
       }
 
-      setIsSubmitted(true);
-      toast({
-        title: "Success! 🎉",
-        description: "Check your email for your Launch Era Kit!",
-      });
+      // Add subscriber to Flodesk
+      if (flodeskKey) {
+        promises.push(
+          fetch('https://api.flodesk.com/v1/subscribers', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              first_name: formData.name,
+            }),
+          }).then(async (res) => {
+            const data = await res.json();
+            console.log('Flodesk Response:', res.status, data);
+            if (!res.ok) throw new Error('Flodesk: ' + (data.message || 'Failed'));
+            return { service: 'Flodesk', success: true };
+          })
+        );
+      }
+
+      // Wait for all API calls to complete
+      const results = await Promise.allSettled(promises);
+
+      // Check if at least one succeeded
+      const anySuccess = results.some(r => r.status === 'fulfilled');
+      const failures = results.filter(r => r.status === 'rejected');
+
+      if (failures.length > 0) {
+        console.warn('Some services failed:', failures);
+      }
+
+      if (anySuccess) {
+        setIsSubmitted(true);
+        toast({
+          title: "Success! 🎉",
+          description: "Check your email for your Launch Era Kit!",
+        });
+      } else {
+        throw new Error('All services failed to subscribe');
+      }
     } catch (error) {
-      console.error('MailerLite error:', error);
+      console.error('Subscription error:', error);
       toast({
         title: "Something went wrong",
         description: error instanceof Error ? error.message : "Please try again or contact support.",
