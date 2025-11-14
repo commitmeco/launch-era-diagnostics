@@ -88,7 +88,7 @@ const Quiz = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center py-8 sm:py-12 px-4 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 bg-magenta rounded-full blur-3xl" />
@@ -96,9 +96,9 @@ const Quiz = () => {
         <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-blush rounded-full blur-2xl" />
       </div>
 
-      <div className="w-full max-w-2xl relative z-10">
+      <div className="w-full max-w-2xl relative z-10 px-2">
         <ProgressBar current={currentQuestion + 1} total={questions.length} />
-        
+
         <Question
           question={questions[currentQuestion]}
           onAnswer={handleAnswer}

@@ -118,4 +118,31 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Ensure proper rendering in iframes (Wix embedding) */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Better touch targets for mobile */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Prevent unwanted scrolling issues in iframes */
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* Force text wrapping in quiz buttons */
+  .word-break {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
 }

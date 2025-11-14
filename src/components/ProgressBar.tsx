@@ -7,12 +7,12 @@ const ProgressBar = ({ current, total }: ProgressBarProps) => {
   const percentage = (current / total) * 100;
 
   return (
-    <div className="mb-12">
+    <div className="mb-8 md:mb-12">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-muted-foreground">
+        <span className="text-xs sm:text-sm font-medium text-muted-foreground">
           {current} of {total}
         </span>
-        <span className="text-sm font-typewriter text-[hsl(var(--riot-pink))]">
+        <span className="text-xs sm:text-sm font-typewriter text-[hsl(var(--riot-pink))]">
           {Math.round(percentage)}%
         </span>
       </div>

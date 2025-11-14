@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Embed Test - Simulating Wix</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      background: #f5f5f5;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    iframe {
+      width: 100%;
+      border: none;
+      display: block;
+      min-height: 800px;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input[type="number"] {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      width: 120px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-end;
+    }
+
+    button:hover {
+      background: #5568d3;
+    }
+
+    .device-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .device-btn {
+      padding: 8px 16px;
+      background: #764ba2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .device-btn:hover {
+      background: #5f3a82;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
+
+      button {
+        align-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Quiz Embed Test</h1>
+    <p class="subtitle">Testing how your quiz looks when embedded in Wix (or any website)</p>
+
+    <div class="controls">
+      <div class="control-group">
+        <label for="height">iframe Height (px)</label>
+        <input type="number" id="height" value="800" min="400" max="2000" step="50">
+      </div>
+
+      <button onclick="updateHeight()">Update Height</button>
+
+      <div style="flex: 1; min-width: 100%;"></div>
+
+      <label style="margin-right: auto;">Quick Device Tests:</label>
+      <div class="device-buttons">
+        <button class="device-btn" onclick="setSize(375, 667)">📱 iPhone SE</button>
+        <button class="device-btn" onclick="setSize(390, 844)">📱 iPhone 12</button>
+        <button class="device-btn" onclick="setSize(360, 640)">📱 Galaxy S9</button>
+        <button class="device-btn" onclick="setSize(768, 1024)">📱 iPad</button>
+        <button class="device-btn" onclick="setSize('100%', 800)">💻 Desktop</button>
+      </div>
+    </div>
+
+    <div class="iframe-wrapper" id="wrapper">
+      <iframe
+        id="quiz-iframe"
+        src="http://localhost:8080"
+        title="Launch Era Quiz"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <div class="info">
+      <strong>📋 Instructions:</strong>
+      <ol style="margin: 10px 0 0 20px; line-height: 1.6;">
+        <li>Make sure your quiz is running: <code>npm run dev</code></li>
+        <li>Use the controls above to test different screen sizes</li>
+        <li>Try the device presets to see mobile responsiveness</li>
+        <li>Adjust the height if content is cut off or there's too much white space</li>
+        <li>This simulates exactly how it will look embedded in Wix!</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    function updateHeight() {
+      const height = document.getElementById('height').value;
+      const iframe = document.getElementById('quiz-iframe');
+      iframe.style.minHeight = height + 'px';
+    }
+
+    function setSize(width, height) {
+      const wrapper = document.getElementById('wrapper');
+      const iframe = document.getElementById('quiz-iframe');
+
+      if (width === '100%') {
+        wrapper.style.maxWidth = '100%';
+        wrapper.style.margin = '0 auto';
+      } else {
+        wrapper.style.maxWidth = width + 'px';
+        wrapper.style.margin = '0 auto';
+      }
+
+      iframe.style.minHeight = height + 'px';
+      document.getElementById('height').value = height;
+    }
+
+    // Listen for messages from iframe (optional, for dynamic height)
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'resize') {
+        const iframe = document.getElementById('quiz-iframe');
+        iframe.style.minHeight = e.data.height + 'px';
+      }
+    });
+  </script>
+</body>
+</html>
