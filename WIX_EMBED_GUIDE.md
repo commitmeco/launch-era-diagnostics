@@ -1,6 +1,10 @@
-# Wix Embedding Guide for Launch Era Quiz
+# Wix Embedding Guide for Launch Era Quiz + Lead Capture
 
 ## 🚀 Quick Start
+
+You now have TWO pages to embed:
+1. **Quiz Page** - The main quiz (`/`)
+2. **Lead Capture Form** - Email collection page (`/get-kit`)
 
 ### Step 1: Deploy Your Quiz
 
@@ -25,7 +29,9 @@ Choose one of these methods:
 
 ## 📱 Embed in Wix
 
-### Method 1: HTML iframe (Recommended)
+### QUIZ PAGE - Embed the Main Quiz
+
+#### Method 1: HTML iframe (Recommended)
 
 1. **Open Wix Editor**
 2. Click **"+"** (Add Elements)
@@ -50,7 +56,48 @@ Choose one of these methods:
 6. **Adjust height** (try 850-1000px depending on your page layout)
 7. **Set responsive**: Click the element → "Stretch" → "Fit to Screen Width"
 
-### Method 2: Custom Element
+---
+
+### LEAD CAPTURE FORM - Embed on Thank You/Confirmation Page
+
+Use this on your Wix confirmation/thank you page after the quiz:
+
+**iframe code:**
+
+```html
+<iframe
+  src="YOUR_DEPLOYED_URL_HERE/get-kit"
+  width="100%"
+  height="700"
+  frameborder="0"
+  scrolling="auto"
+  style="border:none; max-width:100%; display:block;"
+  allow="clipboard-write"
+  title="Get Your Launch Era Kit"
+  loading="lazy"
+></iframe>
+```
+
+**Settings for this form:**
+- **Width**: Fit to Screen Width (responsive)
+- **Height**: 700px (smaller than quiz, form is more compact)
+- **Page**: Place on a separate Wix page (like "Get Your Kit" or "Thank You")
+
+---
+
+### Alternative: Link Instead of Embed
+
+Instead of embedding the form, you can just link to it:
+
+1. **In your quiz results**, add a button/link
+2. **Link to**: `https://your-netlify-url.netlify.app/get-kit`
+3. **Opens in**: New tab or same page
+
+This is simpler and avoids nested iframes!
+
+---
+
+### Method 2: Custom Element (Alternative)
 
 1. **Add Custom Element**
 2. Select **"HTML"** or **"Embed a Widget"**
