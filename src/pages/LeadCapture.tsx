@@ -38,11 +38,15 @@ const LeadCapture = () => {
 
     try {
       // Add subscriber to MailerLite
+      const apiKey = import.meta.env.VITE_MAILERLITE_API_KEY;
+
+      console.log('API Key present:', apiKey ? 'Yes' : 'No');
+
       const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_MAILERLITE_API_KEY}`,
+          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           email: formData.email,
@@ -53,8 +57,11 @@ const LeadCapture = () => {
         }),
       });
 
+      const responseData = await response.json();
+      console.log('MailerLite Response:', response.status, responseData);
+
       if (!response.ok) {
-        throw new Error('Failed to subscribe');
+        throw new Error(responseData.message || 'Failed to subscribe');
       }
 
       setIsSubmitted(true);
@@ -66,7 +73,7 @@ const LeadCapture = () => {
       console.error('MailerLite error:', error);
       toast({
         title: "Something went wrong",
-        description: "Please try again or contact support.",
+        description: error instanceof Error ? error.message : "Please try again or contact support.",
         variant: "destructive",
       });
     } finally {
