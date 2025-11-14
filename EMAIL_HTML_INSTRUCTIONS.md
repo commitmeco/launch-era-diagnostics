@@ -3,7 +3,7 @@
 ## 🎨 What I Created
 
 I've created `email-template.html` - a fully branded HTML email that matches your quiz aesthetic with:
-- ✅ Your brand colors (punk coral, riot pink, lilac grit)
+- ✅ Your brand colors (cobalt blue accents)
 - ✅ Special Elite typewriter font for headings
 - ✅ DM Sans for body text
 - ✅ Gradient buttons and backgrounds
@@ -114,18 +114,19 @@ These should work automatically in MailerLite!
 
 Find and replace these hex codes:
 
-**Punk Coral** (`#f35336`):
+**Cobalt Blue** (`#0080ff`):
 - Main gradient buttons
 - Accent text
 - Brand elements
+- Icons
 
-**Riot Pink** (`#fb4873`):
+**Medium Blue** (`#0066dd`):
 - Gradient endings
 - Secondary accents
 
-**Lilac Grit** (`#7855a4`):
-- Icons
+**Dark Blue** (`#004daa`):
 - Tertiary elements
+- Social buttons
 
 **Backgrounds**:
 - Light gradient: `#f5e6ef` to `#fae8e8`
@@ -152,7 +153,7 @@ If HTML feels too complex, you can:
 1. **Use the template as inspiration**
 2. **Recreate in MailerLite's drag-and-drop editor**:
    - Add text blocks
-   - Add button (use gradient: #f35336 to #fb4873)
+   - Add button (use gradient: #0080ff to #0066dd)
    - Add images
    - Match colors and fonts
 
