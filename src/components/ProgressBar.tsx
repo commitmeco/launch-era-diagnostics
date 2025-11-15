@@ -12,13 +12,13 @@ const ProgressBar = ({ current, total }: ProgressBarProps) => {
         <span className="text-xs sm:text-sm font-medium text-muted-foreground">
           {current} of {total}
         </span>
-        <span className="text-xs sm:text-sm font-typewriter text-[hsl(var(--riot-pink))]">
+        <span className="text-xs sm:text-sm font-typewriter text-cobalt">
           {Math.round(percentage)}%
         </span>
       </div>
       <div className="h-2 bg-muted rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-[hsl(var(--punk-coral))] to-[hsl(var(--riot-pink))] transition-all duration-500 ease-out"
+          className="h-full bg-gradient-to-r from-cobalt to-[#0066dd] transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>

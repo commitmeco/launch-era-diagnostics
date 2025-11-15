@@ -14,15 +14,15 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center py-8 sm:py-12 md:p-4 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-[hsl(var(--punk-coral))] rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-48 h-48 bg-[hsl(var(--riot-pink))] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[hsl(var(--lilac-grit))] rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-20 left-10 w-40 h-40 bg-cobalt rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-cobalt rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-cobalt rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="w-full max-w-4xl relative z-10 text-center animate-fade-in px-4">
         {/* Brand badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-card rounded-full border border-border mb-6 md:mb-8 shadow-lg">
-          <span className="text-xs font-medium tracking-wider uppercase text-muted-foreground">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-cobalt/10 rounded-full border border-cobalt/30 mb-6 md:mb-8 shadow-lg">
+          <span className="text-xs font-medium tracking-wider uppercase text-cobalt">
             Commit Me Co × Riot Girl Design
           </span>
         </div>
@@ -31,10 +31,10 @@ const Index = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-typewriter text-foreground mb-4 md:mb-6 leading-tight px-2">
           What's Your{" "}
           <span className="relative inline-block">
-            <span className="bg-gradient-to-r from-[hsl(var(--punk-coral))] to-[hsl(var(--riot-pink))] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cobalt to-[#0066dd] bg-clip-text text-transparent">
               Launch Era
             </span>
-            <Sparkles className="absolute -top-3 -right-6 md:-top-4 md:-right-8 w-5 h-5 md:w-6 md:h-6 text-[hsl(var(--riot-pink))] animate-flicker hidden sm:block" />
+            <Sparkles className="absolute -top-3 -right-6 md:-top-4 md:-right-8 w-5 h-5 md:w-6 md:h-6 text-cobalt animate-flicker hidden sm:block" />
           </span>
           ?
         </h1>
@@ -52,7 +52,7 @@ const Index = () => {
         <Button
           onClick={() => setStarted(true)}
           size="lg"
-          className="bg-[hsl(var(--punk-coral))] text-white hover:bg-[hsl(var(--riot-pink))] transition-all shadow-xl hover:shadow-2xl text-base sm:text-lg px-8 py-5 sm:px-10 sm:py-7 group hover:scale-105 w-full sm:w-auto"
+          className="bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-all shadow-xl hover:shadow-2xl text-base sm:text-lg px-8 py-5 sm:px-10 sm:py-7 group hover:scale-105 w-full sm:w-auto"
         >
           <Zap className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-glitch" />
           Discover Your Era
@@ -61,9 +61,9 @@ const Index = () => {
 
         {/* Visual decorative elements */}
         <div className="mt-12 md:mt-16 flex items-center justify-center gap-3 opacity-50">
-          <div className="w-2 h-2 rounded-full bg-[hsl(var(--punk-coral))] animate-pulse" />
-          <div className="w-2 h-2 rounded-full bg-[hsl(var(--riot-pink))] animate-pulse" style={{ animationDelay: '0.3s' }} />
-          <div className="w-2 h-2 rounded-full bg-[hsl(var(--lilac-grit))] animate-pulse" style={{ animationDelay: '0.6s' }} />
+          <div className="w-2 h-2 rounded-full bg-cobalt animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-cobalt animate-pulse" style={{ animationDelay: '0.3s' }} />
+          <div className="w-2 h-2 rounded-full bg-cobalt animate-pulse" style={{ animationDelay: '0.6s' }} />
         </div>
       </div>
 

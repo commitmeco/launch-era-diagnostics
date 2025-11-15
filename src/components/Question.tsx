@@ -37,7 +37,7 @@ const Question = ({ question, onAnswer, questionNumber }: QuestionProps) => {
             key={option.value}
             onClick={() => onAnswer(option.value)}
             variant="outline"
-            className="!whitespace-normal h-auto min-h-[60px] py-4 px-4 sm:py-5 sm:px-5 md:py-6 md:px-6 text-left justify-start text-sm sm:text-base md:text-lg font-sans font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-2 border-white/20 bg-white/5 text-white hover:border-cobalt hover:bg-cobalt/20 group relative overflow-visible active:scale-[0.98] w-full"
+            className="!whitespace-normal h-auto min-h-[60px] py-4 px-4 sm:py-5 sm:px-5 md:py-6 md:px-6 text-left justify-start text-sm sm:text-base md:text-lg font-sans font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-2 border-white/20 bg-white/5 text-white hover:text-white hover:border-cobalt hover:bg-cobalt/20 group relative overflow-visible active:scale-[0.98] w-full"
             style={{
               animationDelay: `${index * 100}ms`,
             }}
