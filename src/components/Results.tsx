@@ -58,7 +58,7 @@ const Confetti = ({ delay }: { delay: number }) => (
     style={{
       left: `${Math.random() * 100}%`,
       animationDelay: `${delay}ms`,
-      backgroundColor: ["hsl(328 100% 54%)", "hsl(214 100% 50%)", "hsl(340 100% 85%)"][
+      backgroundColor: ["hsl(214 100% 50%)", "hsl(214 100% 60%)", "hsl(214 100% 70%)"][
         Math.floor(Math.random() * 3)
       ],
     }}
@@ -96,24 +96,26 @@ const Results = ({ answers }: ResultsProps) => {
       )}
 
       {/* Background gradient */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className={`absolute inset-0 bg-gradient-to-br ${era.gradient}`} />
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-cobalt rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-cobalt rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-cobalt rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="w-full max-w-3xl relative z-10 animate-slide-up">
         {/* Badge */}
         <div className="text-center mb-4 md:mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-card rounded-full border-2 border-primary shadow-lg">
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-            <span className="text-xs md:text-sm font-medium tracking-wider uppercase">Your Result</span>
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-cobalt/10 rounded-full border-2 border-cobalt/30 shadow-lg">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-cobalt" />
+            <span className="text-xs md:text-sm font-medium tracking-wider uppercase text-cobalt">Your Result</span>
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-cobalt" />
           </div>
         </div>
 
         {/* Main Result Card */}
-        <div className="bg-card border-2 border-primary rounded-lg p-6 sm:p-8 md:p-12 shadow-2xl mb-6 md:mb-8">
+        <div className="bg-card border-2 border-cobalt/30 rounded-lg p-6 sm:p-8 md:p-12 shadow-2xl mb-6 md:mb-8">
           <div className="text-center mb-6 md:mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-magenta to-cobalt rounded-full mb-4 md:mb-6 shadow-lg">
+            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-cobalt to-[#0066dd] rounded-full mb-4 md:mb-6 shadow-lg">
               <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" />
             </div>
 
@@ -121,7 +123,7 @@ const Results = ({ answers }: ResultsProps) => {
               {era.name}
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl font-medium text-primary mb-4 md:mb-6 px-2">
+            <p className="text-lg sm:text-xl md:text-2xl font-medium text-cobalt mb-4 md:mb-6 px-2">
               {era.tagline}
             </p>
 
@@ -134,13 +136,13 @@ const Results = ({ answers }: ResultsProps) => {
 
           {/* Decorative divider */}
           <div className="flex items-center gap-4 my-8">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-cobalt/30 to-transparent" />
             <div className="flex gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-magenta" />
               <div className="w-1.5 h-1.5 rounded-full bg-cobalt" />
-              <div className="w-1.5 h-1.5 rounded-full bg-blush" />
+              <div className="w-1.5 h-1.5 rounded-full bg-cobalt" />
+              <div className="w-1.5 h-1.5 rounded-full bg-cobalt" />
             </div>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-cobalt/30 to-transparent" />
           </div>
 
           {/* CTA */}
@@ -162,7 +164,7 @@ const Results = ({ answers }: ResultsProps) => {
                   navigate('/get-kit');
                 }
               }}
-              className="bg-gradient-to-r from-magenta to-cobalt text-white hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 group w-full sm:w-auto"
+              className="bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 group w-full sm:w-auto"
             >
               Get Your Free Launch Era Kit
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
