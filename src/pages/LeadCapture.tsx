@@ -37,99 +37,46 @@ const LeadCapture = () => {
     }
 
     try {
-      const mailerliteKey = import.meta.env.VITE_MAILERLITE_API_KEY;
       const flodeskKey = import.meta.env.VITE_FLODESK_API_KEY;
 
-      console.log('MailerLite Key present:', mailerliteKey ? 'Yes' : 'No');
-      console.log('Flodesk Key present:', flodeskKey ? 'Yes' : 'No');
-
-      // Send to both services in parallel
-      const promises = [];
-
-      // Add subscriber to MailerLite
-      if (mailerliteKey) {
-        const groupId = import.meta.env.VITE_MAILERLITE_GROUP_ID;
-        const groups = groupId ? [groupId] : [];
-
-        promises.push(
-          fetch('https://connect.mailerlite.com/api/subscribers', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${mailerliteKey}`,
-            },
-            body: JSON.stringify({
-              email: formData.email,
-              fields: {
-                name: formData.name,
-              },
-              groups: groups,
-            }),
-          }).then(async (res) => {
-            const data = await res.json();
-            console.log('MailerLite Response:', res.status, data);
-            console.log('Added to group:', groups.length > 0 ? groups[0] : 'No group');
-            if (!res.ok) throw new Error('MailerLite: ' + (data.message || 'Failed'));
-            return { service: 'MailerLite', success: true };
-          })
-        );
+      if (!flodeskKey) {
+        throw new Error('Flodesk API key is not configured. Please add VITE_FLODESK_API_KEY to your environment variables.');
       }
+
+      console.log('Adding subscriber to Flodesk...');
 
       // Add subscriber to Flodesk
-      if (flodeskKey) {
-        promises.push(
-          fetch('https://api.flodesk.com/v1/subscribers', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
-              'User-Agent': 'Launch Era Diagnostics Quiz (launch-era-diagnostics)',
-            },
-            body: JSON.stringify({
-              email: formData.email,
-              first_name: formData.name,
-            }),
-          }).then(async (res) => {
-            const data = await res.json();
-            console.log('Flodesk Response:', res.status, data);
-            if (!res.ok) {
-              console.error('Flodesk API Error:', {
-                status: res.status,
-                statusText: res.statusText,
-                data: data
-              });
-              throw new Error('Flodesk: ' + (data.message || data.error || JSON.stringify(data)));
-            }
-            return { service: 'Flodesk', success: true };
-          })
-        );
-      }
+      const response = await fetch('https://api.flodesk.com/v1/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
+          'User-Agent': 'Launch Era Diagnostics Quiz (launch-era-diagnostics)',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          first_name: formData.name,
+        }),
+      });
 
-      // Wait for all API calls to complete
-      const results = await Promise.allSettled(promises);
+      const data = await response.json();
+      console.log('Flodesk Response:', response.status, data);
 
-      // Check if at least one succeeded
-      const anySuccess = results.some(r => r.status === 'fulfilled');
-      const failures = results.filter(r => r.status === 'rejected');
-
-      if (failures.length > 0) {
-        console.warn('Some services failed:', failures);
-        failures.forEach((failure, index) => {
-          if (failure.status === 'rejected') {
-            console.error(`Service ${index + 1} failure reason:`, failure.reason);
-          }
+      if (!response.ok) {
+        console.error('Flodesk API Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: data
         });
+        throw new Error('Failed to subscribe: ' + (data.message || data.error || 'Please try again'));
       }
 
-      if (anySuccess) {
-        setIsSubmitted(true);
-        toast({
-          title: "Success! 🎉",
-          description: "Check your email for your Launch Era Kit!",
-        });
-      } else {
-        throw new Error('All services failed to subscribe');
-      }
+      // Success - subscriber added to Flodesk
+      setIsSubmitted(true);
+      toast({
+        title: "Success! 🎉",
+        description: "Check your email for your Launch Era Kit!",
+      });
     } catch (error) {
       console.error('Subscription error:', error);
       toast({
