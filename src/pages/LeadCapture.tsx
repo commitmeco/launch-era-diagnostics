@@ -83,6 +83,7 @@ const LeadCapture = () => {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
+              'User-Agent': 'Launch Era Diagnostics Quiz (launch-era-diagnostics)',
             },
             body: JSON.stringify({
               email: formData.email,
@@ -91,7 +92,14 @@ const LeadCapture = () => {
           }).then(async (res) => {
             const data = await res.json();
             console.log('Flodesk Response:', res.status, data);
-            if (!res.ok) throw new Error('Flodesk: ' + (data.message || 'Failed'));
+            if (!res.ok) {
+              console.error('Flodesk API Error:', {
+                status: res.status,
+                statusText: res.statusText,
+                data: data
+              });
+              throw new Error('Flodesk: ' + (data.message || data.error || JSON.stringify(data)));
+            }
             return { service: 'Flodesk', success: true };
           })
         );
@@ -106,6 +114,11 @@ const LeadCapture = () => {
 
       if (failures.length > 0) {
         console.warn('Some services failed:', failures);
+        failures.forEach((failure, index) => {
+          if (failure.status === 'rejected') {
+            console.error(`Service ${index + 1} failure reason:`, failure.reason);
+          }
+        });
       }
 
       if (anySuccess) {
