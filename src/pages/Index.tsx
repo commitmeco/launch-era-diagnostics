@@ -1,15 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Quiz from "@/components/Quiz";
 import { Sparkles, Zap } from "lucide-react";
 
 const Index = () => {
-  const [started, setStarted] = useState(false);
-
-  if (started) {
-    return <Quiz />;
-  }
-
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center py-8 sm:py-12 md:p-4 relative overflow-hidden">
       {/* Decorative background elements */}
@@ -50,13 +42,15 @@ const Index = () => {
 
         {/* CTA Button */}
         <Button
-          onClick={() => setStarted(true)}
+          asChild
           size="lg"
           className="bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-all shadow-xl hover:shadow-2xl text-base sm:text-lg px-8 py-5 sm:px-10 sm:py-7 group hover:scale-105 w-full sm:w-auto"
         >
-          <Zap className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-glitch" />
-          Discover Your Era
-          <Sparkles className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-glitch" />
+          <a href="https://commitmeco.wixstudio.com/launch-era/download" target="_blank" rel="noopener noreferrer">
+            <Zap className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-glitch" />
+            Discover Your Era
+            <Sparkles className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-glitch" />
+          </a>
         </Button>
 
         {/* Visual decorative elements */}
