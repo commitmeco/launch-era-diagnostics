@@ -12,27 +12,34 @@ Your lead capture form sends new subscribers directly to **Flodesk**!
 
 ---
 
-## 🔧 Step 2: Add API Key Locally (For Testing)
+## 🔧 Step 2: Create Your Segment in Flodesk
+
+1. **Go to**: https://app.flodesk.com/subscribers
+2. **Click "Segments"** → **"Create Segment"**
+3. **Name it**: "Launch Era Quiz"
+4. **Set the filter**: All subscribers (or create a custom filter if you want)
+5. **Save the segment**
+6. **Copy the Segment ID** from the URL bar:
+   - The URL will look like: `https://app.flodesk.com/subscribers?segment=abc123def456`
+   - Copy the ID after `segment=` (e.g., `abc123def456`)
+
+---
+
+## 🔧 Step 3: Add API Key & Segment ID Locally (For Testing)
 
 1. **Create a `.env` file** in your project root (if it doesn't exist)
-2. **Paste your Flodesk API key**:
+2. **Paste your Flodesk API key and Segment ID**:
    ```
    VITE_FLODESK_API_KEY=your_flodesk_api_key_here
+   VITE_FLODESK_SEGMENT_ID=your_segment_id_here
    ```
 3. **Save the file**
 
 ---
 
-## 📧 Step 3: Set Up Automated Emails in Flodesk
+## 📧 Step 4: Set Up Automated Emails in Flodesk
 
-This is where the magic happens! You'll configure Flodesk to automatically send an email when someone is added to your list.
-
-### Create Your Segment
-
-1. **Go to**: https://app.flodesk.com/subscribers
-2. **Click "Segments"** → **"Create Segment"**
-3. **Name it**: "Launch Era Kit Subscribers" (or whatever you prefer)
-4. **Set the filter**: All subscribers (or create a custom filter if you want to target specific subscribers)
+This is where the magic happens! You'll configure Flodesk to automatically send an email when someone is added to your "Launch Era Quiz" segment.
 
 ### Create Your Workflow (Automation)
 
@@ -40,7 +47,7 @@ This is where the magic happens! You'll configure Flodesk to automatically send 
 2. **Click "Create Workflow"**
 3. **Choose a trigger**:
    - Select **"Subscriber added to segment"**
-   - Choose the segment you just created
+   - Choose the **"Launch Era Quiz"** segment you created in Step 2
 4. **Add an action**:
    - Click the **"+"** button
    - Select **"Send Email"**
@@ -66,7 +73,7 @@ This is where the magic happens! You'll configure Flodesk to automatically send 
 
 ---
 
-## 🧪 Step 4: Test Locally
+## 🧪 Step 5: Test Locally
 
 ```bash
 # Restart dev server
@@ -85,15 +92,18 @@ npm run dev
 
 ---
 
-## 🚀 Step 5: Add API Key to Production (Netlify)
+## 🚀 Step 6: Add API Key & Segment ID to Production (Netlify)
 
 1. **Go to Netlify Dashboard**: https://app.netlify.com
 2. **Click on your site**
 3. **Go to**: Site settings → Environment variables
 4. **Click "Add a variable"**
-5. **Add**:
+5. **Add both variables**:
    - Key: `VITE_FLODESK_API_KEY`
    - Value: Your Flodesk API key
+   - Click "Add a variable" again
+   - Key: `VITE_FLODESK_SEGMENT_ID`
+   - Value: Your Flodesk segment ID (from Step 2)
 6. **Save**
 7. **Trigger a redeploy**: Deploys → Trigger deploy → Clear cache and deploy site
 
@@ -105,8 +115,9 @@ When someone submits the form:
 
 1. ✅ **Form is submitted** with name and email
 2. ✅ **Subscriber is added to Flodesk** via API
-3. ✅ **Flodesk workflow triggers** automatically
-4. ✅ **Email is sent** with your Launch Era Kit content
+3. ✅ **Subscriber is automatically added to the "Launch Era Quiz" segment**
+4. ✅ **Flodesk workflow triggers** automatically when subscriber joins the segment
+5. ✅ **Email is sent** with your Launch Era Kit content
 
 **Benefits:**
 - Fully automated - no manual work needed!
@@ -121,13 +132,15 @@ When someone submits the form:
 The form currently sends:
 - **Email**: User's email address
 - **First Name**: User's name
+- **Segment ID**: Automatically adds subscriber to "Launch Era Quiz" segment
 
-You can add more data by editing `src/pages/LeadCapture.tsx` around line 49:
+You can add more custom data by editing `src/pages/LeadCapture.tsx` around line 59:
 
 ```typescript
 body: JSON.stringify({
   email: formData.email,
   first_name: formData.name,
+  ...(segmentId && { segment_ids: [segmentId] }),
   // Add custom fields here if needed
   custom_fields: {
     quiz_result: 'Headliner Era', // Example
@@ -144,8 +157,10 @@ body: JSON.stringify({
 ### Flodesk not receiving subscribers
 **Check:**
 - API key is correct in `.env` or Netlify environment variables
+- Segment ID is correct in `.env` or Netlify environment variables
 - Browser console shows "Flodesk Response: 200" or "201" (success)
 - Flodesk account is active and in good standing
+- Check if subscriber appears in Flodesk dashboard (even if not in the segment)
 
 ### Email not being sent automatically
 **Check:**

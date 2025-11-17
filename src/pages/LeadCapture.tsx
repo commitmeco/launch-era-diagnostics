@@ -45,17 +45,20 @@ const LeadCapture = () => {
 
       console.log('Adding subscriber to Flodesk...');
 
+      // Get segment ID from environment variable
+      const segmentId = import.meta.env.VITE_FLODESK_SEGMENT_ID;
+
       // Add subscriber to Flodesk
       const response = await fetch('https://api.flodesk.com/v1/subscribers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
-          'User-Agent': 'Launch Era Diagnostics Quiz (launch-era-diagnostics)',
         },
         body: JSON.stringify({
           email: formData.email,
           first_name: formData.name,
+          ...(segmentId && { segment_ids: [segmentId] }),
         }),
       });
 
