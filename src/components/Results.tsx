@@ -2,7 +2,6 @@ import { Answer } from "./Quiz";
 import { Button } from "./ui/button";
 import { Sparkles, Star, Zap, Heart, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface ResultsProps {
   answers: Answer[];
@@ -67,7 +66,6 @@ const Confetti = ({ delay }: { delay: number }) => (
 
 const Results = ({ answers }: ResultsProps) => {
   const [showConfetti, setShowConfetti] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 3000);
@@ -154,20 +152,14 @@ const Results = ({ answers }: ResultsProps) => {
               Get your free Launch Era Kit with custom strategies for your style
             </p>
             <Button
+              asChild
               size="lg"
-              onClick={() => {
-                // If embedded in iframe, open in parent window
-                // Otherwise, navigate normally
-                if (window.self !== window.top) {
-                  window.open(window.location.origin + '/get-kit', '_blank');
-                } else {
-                  navigate('/get-kit');
-                }
-              }}
               className="bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 group w-full sm:w-auto"
             >
-              Get Your Free Launch Era Kit
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              <a href="https://commitmeco.wixstudio.com/launch-era/download" target="_blank" rel="noopener noreferrer">
+                Get Your Free Launch Era Kit
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
           </div>
         </div>
