@@ -156,7 +156,7 @@ const Results = ({ answers }: ResultsProps) => {
               size="lg"
               className="bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 group w-full sm:w-auto"
             >
-              <a href="/get-kit">
+              <a href="https://commitmeco.wixstudio.com/launch-era/download" target="_blank" rel="noopener noreferrer">
                 Get Your Free Launch Era Kit
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </a>
