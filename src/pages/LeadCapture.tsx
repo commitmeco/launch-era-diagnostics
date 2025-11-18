@@ -132,7 +132,7 @@ const LeadCapture = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center py-8 sm:py-12 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-start sm:justify-center py-6 sm:py-12 px-4 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-20 left-10 w-40 h-40 bg-cobalt rounded-full blur-3xl animate-pulse" />
@@ -142,32 +142,32 @@ const LeadCapture = () => {
 
       <div className="w-full max-w-md relative z-10 animate-fade-in">
         {/* Badge */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cobalt/10 rounded-full border border-cobalt/30 shadow-lg">
-            <Download className="w-4 h-4 text-cobalt" />
-            <span className="text-xs sm:text-sm font-medium tracking-wider uppercase text-cobalt">
+        <div className="text-center mb-4 sm:mb-6 mt-4 sm:mt-0">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-cobalt/10 rounded-full border border-cobalt/30 shadow-lg">
+            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cobalt" />
+            <span className="text-xs font-medium tracking-wider uppercase text-cobalt">
               Free Download
             </span>
           </div>
         </div>
 
         {/* Main Card */}
-        <div className="bg-card border-2 border-cobalt/30 rounded-lg p-6 sm:p-8 shadow-2xl">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-typewriter text-foreground mb-3 leading-tight">
+        <div className="bg-card border-2 border-cobalt/30 rounded-lg p-5 sm:p-8 shadow-2xl">
+          <div className="text-center mb-5 sm:mb-6">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-typewriter text-foreground mb-2 sm:mb-3 leading-tight px-2">
               Get Your Free{" "}
               <span className="bg-gradient-to-r from-cobalt to-[#0066dd] bg-clip-text text-transparent">
                 Launch Era Kit
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-xs sm:text-base text-muted-foreground px-2">
               Custom strategies, templates, and checklists tailored to your launch style
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-sm font-medium">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="name" className="text-xs sm:text-sm font-medium">
                 Your Name
               </Label>
               <Input
@@ -176,13 +176,13 @@ const LeadCapture = () => {
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="h-12 text-base"
+                className="h-10 sm:h-12 text-sm sm:text-base"
                 required
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="email" className="text-xs sm:text-sm font-medium">
                 Email Address
               </Label>
               <Input
@@ -191,7 +191,7 @@ const LeadCapture = () => {
                 placeholder="your@email.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="h-12 text-base"
+                className="h-10 sm:h-12 text-sm sm:text-base"
                 required
               />
             </div>
@@ -199,7 +199,7 @@ const LeadCapture = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-12 bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-opacity shadow-lg text-base sm:text-lg font-semibold"
+              className="w-full h-10 sm:h-12 bg-gradient-to-r from-cobalt to-[#0066dd] text-white hover:opacity-90 transition-opacity shadow-lg text-sm sm:text-lg font-semibold"
             >
               {isSubmitting ? (
                 <>
@@ -207,7 +207,7 @@ const LeadCapture = () => {
                 </>
               ) : (
                 <>
-                  <Download className="mr-2 w-5 h-5" />
+                  <Download className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                   Send Me the Kit
                 </>
               )}
