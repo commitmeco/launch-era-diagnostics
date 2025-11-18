@@ -37,29 +37,41 @@ const LeadCapture = () => {
     }
 
     try {
-      console.log('Adding subscriber...');
+      const flodeskKey = import.meta.env.VITE_FLODESK_API_KEY;
 
-      // Call the Netlify serverless function instead of directly calling Flodesk API
-      const response = await fetch('/.netlify/functions/subscribe', {
+      if (!flodeskKey) {
+        throw new Error('Flodesk API key is not configured. Please add VITE_FLODESK_API_KEY to your environment variables.');
+      }
+
+      console.log('Adding subscriber to Flodesk...');
+
+      // Get segment ID from environment variable
+      const segmentId = import.meta.env.VITE_FLODESK_SEGMENT_ID;
+
+      // Add subscriber to Flodesk
+      const response = await fetch('https://api.flodesk.com/v1/subscribers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(flodeskKey + ':')}`,
         },
         body: JSON.stringify({
-          name: formData.name,
           email: formData.email,
+          first_name: formData.name,
+          ...(segmentId && { segment_ids: [segmentId] }),
         }),
       });
 
       const data = await response.json();
-      console.log('Subscription Response:', response.status, data);
+      console.log('Flodesk Response:', response.status, data);
 
       if (!response.ok) {
-        console.error('Subscription Error:', {
+        console.error('Flodesk API Error:', {
           status: response.status,
+          statusText: response.statusText,
           data: data
         });
-        throw new Error(data.error || 'Failed to subscribe. Please try again.');
+        throw new Error('Failed to subscribe: ' + (data.message || data.error || 'Please try again'));
       }
 
       // Success - subscriber added to Flodesk
