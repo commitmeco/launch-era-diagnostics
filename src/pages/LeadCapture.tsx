@@ -114,7 +114,9 @@ const LeadCapture = () => {
           <p className="text-base sm:text-lg text-foreground/80 mb-6 max-w-md mx-auto">
             Thanks for signing up, <span className="font-semibold text-cobalt">{formData.name}</span>!
             <br />
-            Scroll down to get started.
+            Your freebies are heading to your inbox.
+            <br />
+            Scroll down to see what's coming!
           </p>
 
           <p className="text-xs sm:text-sm text-muted-foreground">
