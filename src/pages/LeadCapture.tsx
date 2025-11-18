@@ -108,38 +108,22 @@ const LeadCapture = () => {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-typewriter text-foreground mb-4 leading-tight">
-            Check Your Email! 📧
+            You're In! ✨
           </h1>
 
           <p className="text-base sm:text-lg text-foreground/80 mb-6 max-w-md mx-auto">
-            We've sent your <span className="font-semibold text-cobalt">Launch Era Kit</span> to <span className="font-semibold">{formData.email}</span>
+            Thanks for signing up, <span className="font-semibold text-cobalt">{formData.name}</span>!
+            <br />
+            Scroll down to get started.
           </p>
 
-          <div className="bg-card border-2 border-cobalt/30 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold mb-3 text-foreground">What's in your kit:</h3>
-            <ul className="text-left text-sm sm:text-base text-foreground/70 space-y-2">
-              <li className="flex items-start gap-2">
-                <Sparkles className="w-5 h-5 text-cobalt flex-shrink-0 mt-0.5" />
-                <span>Custom launch strategy for your era</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Sparkles className="w-5 h-5 text-cobalt flex-shrink-0 mt-0.5" />
-                <span>Social media templates & captions</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Sparkles className="w-5 h-5 text-cobalt flex-shrink-0 mt-0.5" />
-                <span>Launch timeline checklist</span>
-              </li>
-            </ul>
-          </div>
-
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Don't see it? Check your spam folder or{" "}
+            Need to update your info?{" "}
             <button
               onClick={() => setIsSubmitted(false)}
               className="underline hover:text-foreground transition-colors"
             >
-              try again
+              Edit your submission
             </button>
           </p>
         </div>
